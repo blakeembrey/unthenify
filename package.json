@@ -1,6 +1,6 @@
 {
   "name": "unthenify",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Callbackify a promise function. The logical reverse of `thenify`.",
   "main": "dist/index.js",
   "files": [
