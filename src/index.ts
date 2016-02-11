@@ -1,5 +1,5 @@
 import arity = require('util-arity')
-import Promise = require('native-or-bluebird')
+import { Promise } from 'es6-promise'
 
 function unthenify <U> (
   fn: () => Promise<U>
