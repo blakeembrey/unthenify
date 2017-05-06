@@ -4,6 +4,7 @@
 [![NPM downloads][downloads-image]][downloads-url]
 [![Build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
+[![Greenkeeper badge](https://badges.greenkeeper.io/blakeembrey/unthenify.svg)](https://greenkeeper.io/)
 
 > Callbackify a promise function. The logical reverse of [`thenify`](https://www.npmjs.com/package/thenify).
 
