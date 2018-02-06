@@ -1,29 +1,35 @@
 import arity = require('util-arity')
-import Promise = require('any-promise')
 
-function unthenify <U> (
-  fn: () => Promise<U>
-): (cb: unthenify.Callback<U>) => any
-function unthenify <T1, U> (fn:
-  (a: T1) => Promise<U>
-): (a: T1, cb: unthenify.Callback<U>) => any
-function unthenify <T1, T2, U> (
-  fn: (a: T1, b: T2) => Promise<U>
-): (a: T1, b: T2, cb: unthenify.Callback<U>) => any
-function unthenify <T1, T2, T3, U> (
-  fn: (a: T1, b: T2, c: T3) => Promise<U>
-): (a: T1, b: T2, c: T3, cb: unthenify.Callback<U>) => any
-function unthenify <T1, T2, T3, T4, U> (fn:
-  (a: T1, b: T2, c: T3, d: T4) => Promise<U>
-): (a: T1, b: T2, c: T3, d: T4, cb: unthenify.Callback<U>) => any
-function unthenify <T1, T2, T3, T4, T5, U> (
-  fn: (a: T1, b: T2, c: T3, d: T4, e: T5) => Promise<U>
-): (a: T1, b: T2, c: T3, d: T4, e: T5, cb: unthenify.Callback<U>) => any
-function unthenify <T1, T2, T3, T4, T5, T6, U> (
-  fn: (a: T1, b: T2, c: T3, d: T4, e: T5, f: T6) => Promise<U>
-): (a: T1, b: T2, c: T3, d: T4, e: T5, f: T6, cb: unthenify.Callback<U>) => any
-function unthenify <U> (fn: (...args: any[]) => Promise<any>): (...args: any[]) => any {
-  return arity(fn.length + 1, function (...args: any[]) {
+export function unthenify <T, U> (
+  this: T,
+  fn: () => PromiseLike<U>
+): (this: T, cb: Callback<U>) => void
+export function unthenify <T, T1, U> (
+  this: T,
+  fn: (a: T1) => PromiseLike<U>
+): (this: T, a: T1, cb: Callback<U>) => void
+export function unthenify <T, T1, T2, U> (
+  this: T,
+  fn: (a: T1, b: T2) => PromiseLike<U>
+): (this: T, a: T1, b: T2, cb: Callback<U>) => void
+export function unthenify <T, T1, T2, T3, U> (
+  this: T,
+  fn: (a: T1, b: T2, c: T3) => PromiseLike<U>
+): (this: T, a: T1, b: T2, c: T3, cb: Callback<U>) => void
+export function unthenify <T, T1, T2, T3, T4, U> (
+  this: T,
+  fn: (a: T1, b: T2, c: T3, d: T4) => PromiseLike<U>
+): (this: T, a: T1, b: T2, c: T3, d: T4, cb: Callback<U>) => void
+export function unthenify <T, T1, T2, T3, T4, T5, U> (
+  this: T,
+  fn: (a: T1, b: T2, c: T3, d: T4, e: T5) => PromiseLike<U>
+): (this: T, a: T1, b: T2, c: T3, d: T4, e: T5, cb: Callback<U>) => void
+export function unthenify <T, T1, T2, T3, T4, T5, T6, U> (
+  this: T,
+  fn: (a: T1, b: T2, c: T3, d: T4, e: T5, f: T6) => PromiseLike<U>
+): (this: T, a: T1, b: T2, c: T3, d: T4, e: T5, f: T6, cb: Callback<U>) => void
+export function unthenify <T, U> (this: T, fn: (...args: any[]) => PromiseLike<any>): (this: T, ...args: any[]) => void {
+  return arity(fn.length + 1, function (this: T, ...args: any[]) {
     const cb = args.pop()
 
     fn.apply(this, args)
@@ -34,8 +40,4 @@ function unthenify <U> (fn: (...args: any[]) => Promise<any>): (...args: any[]) 
   })
 }
 
-namespace unthenify {
-  export type Callback <T> = (error: Error, result: T) => any
-}
-
-export = unthenify
+export type Callback <T> = (error: Error, result: T) => any

@@ -1,6 +1,5 @@
 import test = require('blue-tape')
-import Promise = require('any-promise')
-import unthenify = require('./index')
+import { unthenify } from './index'
 
 test('unthenify', t => {
   t.test('make callbacks from promise functions', t => {

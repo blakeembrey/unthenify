@@ -1,18 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "lib": ["es2015"],
+    "sourceRoot": "src/",
     "outDir": "dist/",
     "module": "commonjs",
-    "noImplicitAny": true,
-    "removeComments": true,
     "declaration": true,
+    "strict": true,
     "sourceMap": true,
-    "inlineSources": true,
-    "newLine": "LF"
-  },
-  "files": [
-    "src/index.ts",
-    "src/index.spec.ts",
-    "typings/index.d.ts"
-  ]
+    "inlineSources": true
+  }
 }
