@@ -4,7 +4,6 @@
 [![NPM downloads][downloads-image]][downloads-url]
 [![Build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
-[![Greenkeeper badge](https://badges.greenkeeper.io/blakeembrey/unthenify.svg)](https://greenkeeper.io/)
 
 > Callbackify a promise function. The logical reverse of [`thenify`](https://www.npmjs.com/package/thenify).
 
@@ -19,22 +18,18 @@ npm install unthenify --save
 Wrap a function that usually returns a promise to accept callbacks.
 
 ```js
-var Batch = require('batch')
-var thenify = require('thenify')
-var unthenify = require('unthenify')
+import { unthenify } from 'unthenify'
 
-// ...
-  .then(function () {
-    var batch = new Batch()
+const handler = unthenify(async function (payload) {
+  // Do something...
 
-    batch.concurrency(10)
+  return true
+})
 
-    files.forEach(path => {
-      batch.push(unthenify(() => processFile(path)))
-    })
-
-    return thenify(done => batch.end(done))()
-  })
+// Use with callback-style.
+handler({}, function (err, result) {
+  console.log(err, result) //=> undefined, true
+})
 ```
 
 ## License
